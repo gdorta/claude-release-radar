@@ -6,6 +6,8 @@
 [![Skill](https://img.shields.io/badge/Claude-Skill-d97757.svg)](https://docs.claude.com)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](#)
 
+![Claude Release Radar — a personalized "what's new in Claude" briefing that checks each release against your dev setup and flags what affects you](assets/briefing.png)
+
 Anthropic ships *fast*: new models, API changes, and near-weekly Claude Code releases.
 Staying current means checking five different pages and remembering what you already saw.
 
