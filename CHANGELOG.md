@@ -3,6 +3,22 @@
 All notable changes to Claude Release Radar are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.0.1] — 2026-06-02
+
+### Changed
+- Tuned the skill `description` for more reliable triggering: added natural phrasings
+  ("should I update Claude Code?", "what can the API do now?") and an explicit
+  "do NOT use for…" clause to suppress near-misses (running updates, summarizing the
+  user's own changelog, other products).
+
+### Added
+- `evals/trigger-eval.json` — 20 labelled trigger queries (10 positive, 10 near-miss)
+  plus `evals/README.md` for running the description optimizer.
+
+### Verified
+- Live smoke test against the real npm registry and Claude Code CHANGELOG confirmed the
+  npm and markdown-changelog parsers, personalization, and graceful-degradation paths.
+
 ## [1.0.0] — 2026-06-02
 
 ### Added

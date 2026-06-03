@@ -1,0 +1,22 @@
+[
+  { "query": "yo is there a new version of claude code? i feel like i've been on the same one forever, haven't updated in weeks", "should_trigger": true },
+  { "query": "what's new in claude this week, anything worth knowing about?", "should_trigger": true },
+  { "query": "did anthropic ship any new models recently — is there something better than what i'm using for long-context stuff", "should_trigger": true },
+  { "query": "catch me up on claude, i've been heads-down on a project for a month and i'm totally out of the loop on releases", "should_trigger": true },
+  { "query": "can you set up a weekly digest that tells me what changed in claude code every monday morning", "should_trigger": true },
+  { "query": "is my claude-code out of date? i think i'm on 2.1.something", "should_trigger": true },
+  { "query": "what's the latest on the claude api — did structured outputs ever ship to GA?", "should_trigger": true },
+  { "query": "give me a rundown of recent anthropic announcements and what they actually mean for my setup", "should_trigger": true },
+  { "query": "should i update claude code or is there a reason to hold off — what's in the newest release?", "should_trigger": true },
+  { "query": "update claude code to the latest version for me", "should_trigger": false },
+  { "query": "summarize the CHANGELOG.md in my repo, it's at ./CHANGELOG.md and i need a quick overview for standup", "should_trigger": false },
+  { "query": "help me write release notes for v3.2 of our app, here are the merged PRs", "should_trigger": false },
+  { "query": "what's new in next.js 15? i need the breaking changes before i upgrade", "should_trigger": false },
+  { "query": "is there a newer version of the openai python sdk than 1.30?", "should_trigger": false },
+  { "query": "what's the difference between claude opus and sonnet, which should i use for coding?", "should_trigger": false },
+  { "query": "explain how claude code hooks work, i want to set one up", "should_trigger": false },
+  { "query": "my claude code keeps crashing on startup after i updated, can you help me debug it", "should_trigger": false },
+  { "query": "draft a changelog entry for the feature i just built in claude-release-radar", "should_trigger": false },
+  { "query": "what did i change in my last few git commits?", "should_trigger": false },
+  { "query": "keep me posted on claude — ping me whenever something noteworthy ships", "should_trigger": true }
+]

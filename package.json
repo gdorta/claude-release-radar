@@ -1,6 +1,6 @@
 {
   "name": "claude-release-radar",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Claude Skill that keeps you current on every Claude release — only what's new since you last checked, personalized to your setup.",
   "keywords": [
     "claude",

@@ -1,15 +1,19 @@
 ---
 name: claude-release-radar
 description: >-
-  Personalized "what's new in Claude" briefing. Aggregates official Claude release
-  sources (new models & API changes, Claude Code CHANGELOG + npm version, and Claude
-  app updates), shows ONLY what changed since the user last checked, and flags which
-  releases affect the user's own setup with copy-paste commands to try them. Use this
-  skill whenever the user wants to catch up on Claude — e.g. "what's new in Claude",
-  "any new Claude models?", "did Claude Code update?", "latest Claude changelog",
-  "is my claude-code out of date?", "catch me up on Anthropic releases", "what changed
-  in Claude this week" — even if they don't say "release notes". Also use it to set up
-  a recurring daily/weekly Claude-updates digest.
+  Personalized "what's new in Claude" briefing. Aggregates the official Claude release
+  sources — new models, pricing and API changes, the Claude Code CHANGELOG and npm
+  version, and Claude app (web/desktop/mobile) updates — then shows ONLY what changed
+  since the user last checked and flags which releases affect the user's own setup,
+  with copy-paste commands to try them. Use this skill whenever the user wants to catch
+  up on or stay current with Claude, even if they don't say "release notes" — e.g.
+  "what's new in Claude", "any new Claude models?", "did Claude Code update?", "is my
+  claude-code out of date / should I update Claude Code?", "latest Claude changelog",
+  "catch me up on Anthropic releases", "what changed in Claude this week", "what can the
+  API do now?". Also use it to set up a recurring daily or weekly Claude-updates digest.
+  Do NOT use it to actually run an update, to write release notes for the user's own
+  product, or to summarize an unrelated CHANGELOG file from the user's repo — it is
+  specifically about keeping the user current on Anthropic's Claude releases.
 ---
 
 # Claude Release Radar 🛰️
