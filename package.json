@@ -1,0 +1,48 @@
+{
+  "name": "claude-release-radar",
+  "version": "1.0.0",
+  "description": "A Claude Skill that keeps you current on every Claude release — only what's new since you last checked, personalized to your setup.",
+  "keywords": [
+    "claude",
+    "anthropic",
+    "claude-code",
+    "claude-skill",
+    "skill",
+    "changelog",
+    "release-notes",
+    "ai",
+    "llm",
+    "mcp"
+  ],
+  "bin": {
+    "claude-release-radar": "bin/cli.js"
+  },
+  "files": [
+    "SKILL.md",
+    "scripts/radar.py",
+    "scripts/sources.json",
+    "reference/",
+    "bin/cli.js",
+    "examples/sample_briefing.md",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "python3 scripts/radar.py check",
+    "env": "python3 scripts/radar.py env",
+    "sources": "python3 scripts/radar.py sources"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "license": "MIT",
+  "author": "gdorta",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gdorta/claude-release-radar.git"
+  },
+  "bugs": {
+    "url": "https://github.com/gdorta/claude-release-radar/issues"
+  },
+  "homepage": "https://github.com/gdorta/claude-release-radar#readme"
+}
