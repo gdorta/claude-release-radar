@@ -1,6 +1,6 @@
 {
   "name": "claude-release-radar",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "A Claude Skill that keeps you current on every Claude release — only what's new since you last checked, personalized to your setup.",
   "keywords": [
     "claude",
@@ -22,6 +22,8 @@
     "scripts/radar.py",
     "scripts/sources.json",
     "reference/",
+    "skills/",
+    ".claude-plugin/",
     "bin/cli.js",
     "examples/sample_briefing.md",
     "README.md",
@@ -30,7 +32,9 @@
   "scripts": {
     "check": "python3 scripts/radar.py check",
     "env": "python3 scripts/radar.py env",
-    "sources": "python3 scripts/radar.py sources"
+    "sources": "python3 scripts/radar.py sources",
+    "sync": "bash tools/sync-skill.sh",
+    "build:plugin": "bash tools/build-plugin.sh"
   },
   "engines": {
     "node": ">=16"
