@@ -30,6 +30,7 @@
     "LICENSE"
   ],
   "scripts": {
+    "test": "python3 -m unittest discover -s tests -p \"test_*.py\"",
     "check": "python3 scripts/radar.py check",
     "env": "python3 scripts/radar.py env",
     "sources": "python3 scripts/radar.py sources",
