@@ -6,28 +6,13 @@
 [![Skill](https://img.shields.io/badge/Claude-Skill-d97757.svg)](https://docs.claude.com)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](#)
 
-![Claude Release Radar — a personalized "what's new in Claude" briefing that checks each release against your dev setup and flags what affects you](assets/briefing.png)
+![Claude Release Radar — a Claude Desktop plugin and CLI skill that delivers a personalized "what's new in Claude" briefing: only what changed since you last checked, flagged for your setup](assets/banner.png)
 
 Anthropic ships fast: new models, API changes, near-weekly Claude Code releases. Staying current means checking five pages and remembering what you already saw. This skill collapses that into one ask — **"what's new in Claude?"** — and answers with a briefing that shows only what's new since you last checked, flags the releases that actually affect your environment, and gives you the exact command to try them.
 
-```
-🛰️ Claude Release Radar — 2026-06-02  ·  6 days since you last checked
+Here's a real briefing — your version gap up top, then what's new grouped by surface, then exactly what to try:
 
-⚠️ Affects you
-  • You're on Claude Code v2.1.160; latest is v2.4.2 — run `claude update`.
-  • v2.4.2 adds /hooks, which pairs with your pre-commit skill.
-
-🆕 What's new
-  Claude Code
-    • v2.4.2 — checkpoint/rewind, skill auto-discovery
-  Models & API
-    • Opus 4.8 — 1M-token context by default
-    • Structured outputs now GA on Sonnet/Opus/Haiku 4.5
-
-💡 Try this
-  • `claude update` then `/hooks` to automate your lint-on-save
-  • Switch to the new model with `/model`
-```
+![A Claude Release Radar briefing: a "you're already running the headliner" version alert flagged for the user's setup, a grouped what's-new list across Models & API and Claude Code, and copy-paste try-this commands](assets/briefing.png)
 
 ## Install
 
