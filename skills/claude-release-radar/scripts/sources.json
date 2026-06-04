@@ -1,0 +1,76 @@
+{
+  "_comment": "Source registry for Claude Release Radar. type 'agent' = the orchestrating agent should WebFetch and summarize (the engine does not scrape narrative HTML). Structured feeds (npm/atom/markdown-changelog) are parsed deterministically. Toggle 'enabled' or add your own. See reference/sources.md.",
+  "sources": [
+    {
+      "id": "claude-code-npm",
+      "label": "Claude Code",
+      "category": "Claude Code",
+      "type": "npm",
+      "url": "https://registry.npmjs.org/@anthropic-ai/claude-code/latest",
+      "homepage": "https://github.com/anthropics/claude-code",
+      "enabled": true
+    },
+    {
+      "id": "claude-code-releases",
+      "label": "Claude Code GitHub releases",
+      "category": "Claude Code",
+      "type": "atom",
+      "url": "https://github.com/anthropics/claude-code/releases.atom",
+      "enabled": true
+    },
+    {
+      "id": "claude-code-changelog",
+      "label": "Claude Code changelog",
+      "category": "Claude Code",
+      "type": "markdown-changelog",
+      "url": "https://raw.githubusercontent.com/anthropics/claude-code/main/CHANGELOG.md",
+      "homepage": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
+      "enabled": true
+    },
+    {
+      "id": "api-release-notes",
+      "label": "Claude API release notes",
+      "category": "Models & API",
+      "type": "agent",
+      "url": "https://docs.claude.com/en/release-notes/api",
+      "note": "Narrative HTML. Agent WebFetches and extracts entries newer than state.last_checked. If the URL 404s, WebSearch 'Anthropic API release notes'.",
+      "enabled": true
+    },
+    {
+      "id": "anthropic-news",
+      "label": "Anthropic News (model & product launches)",
+      "category": "Models & API",
+      "type": "agent",
+      "url": "https://www.anthropic.com/news",
+      "note": "No stable public feed. Agent WebFetches and reports launches/announcements not yet seen.",
+      "enabled": true
+    },
+    {
+      "id": "claude-apps-release-notes",
+      "label": "Claude apps release notes (web/desktop/mobile)",
+      "category": "Claude apps",
+      "type": "agent",
+      "url": "https://docs.claude.com/en/release-notes/claude-apps",
+      "note": "Narrative HTML. If the URL 404s, WebSearch 'Claude apps release notes' or check support.claude.com release notes.",
+      "enabled": true
+    },
+    {
+      "id": "claude-code-release-notes",
+      "label": "Claude Code release notes (docs)",
+      "category": "Claude Code",
+      "type": "agent",
+      "url": "https://docs.claude.com/en/release-notes/claude-code",
+      "note": "Optional narrative companion to the CHANGELOG. Useful for context the raw changelog omits.",
+      "enabled": false
+    },
+    {
+      "id": "claudelog-youtube",
+      "label": "ClaudeLog — community explainers (YouTube)",
+      "category": "Community",
+      "type": "atom",
+      "url": "https://www.youtube.com/feeds/videos.xml?channel_id=UCmL7cQmNgV-3FxaB3Ueoixg",
+      "note": "Optional human-friendly 'explained in 3 minutes' layer for each Claude Code update. Off by default; flip enabled to true to include.",
+      "enabled": false
+    }
+  ]
+}
