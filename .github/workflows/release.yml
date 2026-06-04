@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Build .plugin
+        run: bash tools/build-plugin.sh
+
+      - name: Attach .plugin to GitHub release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/claude-release-radar.plugin
+          generate_release_notes: true
