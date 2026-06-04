@@ -1,0 +1,25 @@
+name: Verify skill mirror
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Refresh mirror from canonical root files
+        run: bash tools/sync-skill.sh
+
+      - name: Fail if the committed mirror is stale
+        run: |
+          if ! git diff --exit-code skills/; then
+            echo "::error::skills/claude-release-radar/ is out of sync with the canonical root files."
+            echo "Run this locally and commit the result:"
+            echo "  bash tools/sync-skill.sh && git add skills/ && git commit -m 'sync skill mirror'"
+            exit 1
+          fi
+          echo "Mirror is in sync."

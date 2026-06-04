@@ -1,0 +1,19 @@
+{
+  "name": "claude-release-radar",
+  "version": "1.1.0",
+  "description": "Personalized 'what's new in Claude' briefing — only what changed since you last checked, flagged for your setup.",
+  "author": {
+    "name": "gdorta",
+    "url": "https://github.com/gdorta"
+  },
+  "homepage": "https://github.com/gdorta/claude-release-radar",
+  "repository": "https://github.com/gdorta/claude-release-radar",
+  "license": "MIT",
+  "keywords": [
+    "claude",
+    "anthropic",
+    "claude-code",
+    "changelog",
+    "release-notes"
+  ]
+}

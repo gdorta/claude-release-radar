@@ -1,0 +1,17 @@
+{
+  "name": "claude-release-radar",
+  "owner": {
+    "name": "gdorta",
+    "url": "https://github.com/gdorta"
+  },
+  "plugins": [
+    {
+      "name": "claude-release-radar",
+      "source": "./",
+      "description": "Personalized 'what's new in Claude' briefing.",
+      "version": "1.1.0",
+      "category": "developer-tools",
+      "keywords": ["claude", "changelog", "release-notes"]
+    }
+  ]
+}

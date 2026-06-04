@@ -21,3 +21,6 @@ npm-debug.log*
 .idea/
 .vscode/
 *.swp
+
+# Build output (the packaged .plugin is built in CI and attached to releases)
+dist/
