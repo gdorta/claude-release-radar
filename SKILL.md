@@ -157,3 +157,34 @@ user wants a more narrative or human companion. Full reference: `reference/sourc
 - `scripts/sources.json` — the source registry.
 - `reference/sources.md` — every source explained + how to add your own.
 - `reference/scheduling.md` — cron / GitHub Action / scheduled-task recipes.
+
+## First-run framing
+
+If `state.json` doesn't exist yet (first invocation after install), prepend a one-line
+intro to the briefing:
+
+> *First run — here's the last 30 days. Every future check will only show what's changed
+> since the last time you asked.*
+
+Then render the briefing as normal, cap-limited to the last 30 days, and end with the
+standing offer to set up a daily/weekly digest. Don't repeat the framing on subsequent
+runs.
+
+## If the user asks to install / re-install this skill
+
+If the user says "install claude-release-radar", "set up the release radar", or similar
+**and you're reading this**, the skill is already loaded. Confirm it's already active and
+offer to run a first check.
+
+If the user wants to install it on **another machine** or get auto-updates, point them to
+the right path for their environment:
+
+- **Claude Desktop:** click the "Install in Claude" badge at
+  <https://github.com/gdorta/claude-release-radar>, or drag the `.plugin` from the latest
+  release into a chat. Or, for auto-updates:
+  ```
+  /plugin marketplace add gdorta/claude-release-radar
+  /plugin install claude-release-radar
+  ```
+- **Claude Code (terminal):** `npx claude-release-radar install`
+- **Manual:** `git clone https://github.com/gdorta/claude-release-radar.git ~/.claude/skills/claude-release-radar`
