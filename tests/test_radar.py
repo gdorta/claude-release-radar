@@ -135,6 +135,37 @@ class TestDiff(unittest.TestCase):
         new = radar.diff_new(parsed, {"seen": {}}, first_run=True, baseline_limit=3)
         self.assertEqual(len(new), 3)
 
+    def test_filter_since_returns_dated_items_on_or_after_cutoff(self):
+        parsed = [
+            radar.item("demo", "Claude Code", "old", "Old", date="2026-04-30"),
+            radar.item("demo", "Claude Code", "cutoff", "Cutoff", date="2026-05-01"),
+            radar.item("demo", "Claude Code", "new", "New", date="2026-05-30"),
+            radar.item("demo", "Claude Code", "undated", "Undated"),
+            radar.item("demo", "Claude Code", "bad", "Bad", date="not-a-date"),
+        ]
+
+        out = radar.filter_since(parsed, "2026-05-01")
+
+        self.assertEqual([it["id"] for it in out], ["new", "cutoff"])
+
+    def test_filter_since_rejects_invalid_cutoff(self):
+        with self.assertRaises(Exception):
+            radar.filter_since([], "2026/05/01")
+
+    def test_since_parser_accepts_iso_dates(self):
+        args = radar.build_parser().parse_args(["since", "2026-05-01"])
+
+        self.assertEqual(args.date, "2026-05-01")
+        self.assertEqual(args.func, radar.cmd_since)
+
+    def test_since_parser_rejects_non_iso_dates(self):
+        with self.assertRaises(SystemExit):
+            radar.build_parser().parse_args(["since", "2026/05/01"])
+
+    def test_since_parser_rejects_compact_dates(self):
+        with self.assertRaises(SystemExit):
+            radar.build_parser().parse_args(["since", "20260501"])
+
     def test_commit_state_records_seen_and_version(self):
         state = {}
         parsed = self._items("1", "2")

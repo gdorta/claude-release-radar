@@ -88,6 +88,7 @@ Structured feeds (npm, Atom/RSS, Markdown changelog) are parsed deterministicall
 ```bash
 python3 scripts/radar.py check          # aggregate + diff + personalize + render
 python3 scripts/radar.py check --json   # same, as a machine-readable object
+python3 scripts/radar.py since 2026-05-01  # catch up from a date without updating state
 python3 scripts/radar.py env            # show what it detected about your setup
 python3 scripts/radar.py sources        # list configured sources
 python3 scripts/radar.py mark-seen      # commit current items as a baseline

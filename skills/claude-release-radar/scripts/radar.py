@@ -21,6 +21,7 @@ Design goals
 Commands
 --------
   radar.py check     # aggregate + diff + personalize + render
+  radar.py since     # show all dated items on/after a date without touching state
   radar.py env       # just the detected local environment
   radar.py sources   # list configured sources
   radar.py mark-seen # mark everything currently known as seen (commit baseline)
@@ -146,6 +147,20 @@ def parse_iso(s: str | None) -> str | None:
             continue
     m = re.search(r"\d{4}-\d{2}-\d{2}", s)
     return m.group(0) if m else s
+
+
+def parse_since_date(s: str) -> str:
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", s):
+        raise argparse.ArgumentTypeError(
+            f"invalid date {s!r}; expected YYYY-MM-DD"
+        )
+    try:
+        _dt.date.fromisoformat(s)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError(
+            f"invalid date {s!r}; expected YYYY-MM-DD"
+        ) from exc
+    return s
 
 
 def item(source, category, _id, title, date=None, url=None, summary=""):
@@ -435,6 +450,25 @@ def diff_new(parsed, state, first_run, baseline_limit):
     return new
 
 
+def filter_since(parsed, since_date: str) -> list[dict]:
+    """Return dated items whose normalized date is on or after since_date."""
+    cutoff = _dt.date.fromisoformat(since_date)
+
+    out = []
+    for it in parsed:
+        raw_date = it.get("date")
+        if not raw_date:
+            continue
+        try:
+            item_date = _dt.date.fromisoformat(raw_date)
+        except ValueError:
+            continue
+        if item_date >= cutoff:
+            out.append(it)
+    out.sort(key=lambda x: x.get("date") or "", reverse=True)
+    return out
+
+
 def commit_state(state, parsed, npm_latest):
     seen = state.setdefault("seen", {})
     by_source: dict[str, list[str]] = {}
@@ -471,12 +505,19 @@ def render_markdown(result: dict) -> str:
     today = _dt.date.today().isoformat()
     out = [f"# 🛰️ Claude Release Radar — {today}"]
     last = result["state_last_checked"]
-    if result["first_run"]:
+    if result.get("since"):
+        out.append(f"_Since {result['since']}._\n")
+    elif result["first_run"]:
         out.append("_First run — establishing your baseline. Future checks show only what changed._\n")
     else:
         out.append(f"_Since you last checked: {_days_since(last)}._\n")
 
     if not new and not impacts["alerts"]:
+        if result.get("since"):
+            out.append(
+                f"✅ **You're all caught up.** No dated Claude releases on or after {result['since']}."
+            )
+            return "\n".join(out)
         out.append("✅ **You're all caught up.** No new Claude releases since your last check.")
         return "\n".join(out)
 
@@ -574,6 +615,37 @@ def cmd_check(args):
     return 0
 
 
+def cmd_since(args):
+    sources = load_sources(args.sources)
+    parsed, agent_sources, errors, npm_latest = aggregate(
+        sources, args.input, args.timeout)
+    env = detect_env() if not args.no_env else {}
+    new_items = filter_since(parsed, args.date)
+    impacts = compute_impacts(new_items, env, npm_latest) if env else {"alerts": [], "try_hints": []}
+
+    result = {
+        "generated": _dt.datetime.now(_dt.timezone.utc).isoformat(timespec="seconds"),
+        "first_run": False,
+        "state_last_checked": f"since {args.date}",
+        "new_items": new_items,
+        "agent_sources": [{"id": s["id"], "label": s["label"],
+                           "category": s["category"], "url": s["url"]}
+                          for s in agent_sources],
+        "errors": errors,
+        "env": env,
+        "impacts": impacts,
+        "npm_latest": npm_latest,
+        "counts": {"new": len(new_items), "parsed": len(parsed)},
+        "since": args.date,
+    }
+
+    if args.json:
+        print(json.dumps(result, indent=2))
+    else:
+        print(render_markdown(result))
+    return 0
+
+
 def cmd_env(args):
     env = detect_env()
     print(json.dumps(env, indent=2) if args.json else
@@ -615,6 +687,14 @@ def build_parser():
     c.add_argument("--baseline-limit", type=int, default=6, help="max items to show on first run")
     c.add_argument("--timeout", type=int, default=20)
     c.set_defaults(func=cmd_check)
+
+    sd = sub.add_parser("since", help="show all dated items on/after YYYY-MM-DD without updating state")
+    sd.add_argument("date", type=parse_since_date, help="cutoff date in YYYY-MM-DD format")
+    sd.add_argument("--input", default=None, help="dir of pre-fetched <source_id>.raw files")
+    sd.add_argument("--json", action="store_true", help="emit machine JSON instead of markdown")
+    sd.add_argument("--no-env", action="store_true", help="skip local environment detection")
+    sd.add_argument("--timeout", type=int, default=20)
+    sd.set_defaults(func=cmd_since)
 
     e = sub.add_parser("env", help="show detected local environment")
     e.add_argument("--json", action="store_true")
