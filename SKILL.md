@@ -57,6 +57,13 @@ python3 scripts/radar.py check --commit     # render AND mark seen
 python3 scripts/radar.py mark-seen
 ```
 
+For a read-only catch-up window that ignores saved state and does not mark anything
+as seen:
+
+```bash
+python3 scripts/radar.py since 2026-05-01
+```
+
 ### If the engine can't reach the network
 Some environments block the engine's own HTTP. If `check` reports fetch errors, fetch
 the structured sources yourself with **WebFetch**, save each response into a directory
