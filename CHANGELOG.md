@@ -3,6 +3,16 @@
 All notable changes to Claude Release Radar are documented here.
 Format loosely follows [Keep a Changelog](https://keepachangelog.com/).
 
+## [Unreleased]
+
+### Added
+- Test suite (`tests/test_radar.py`, stdlib `unittest`, 21 tests) covering the parsers,
+  version comparison, diff/state logic, personalization, rendering, and the MCP
+  names-only privacy guarantee. Run with `npm test`.
+- `Tests` CI workflow running the suite on Python 3.8–3.12 plus a Node install smoke test.
+- `CONTRIBUTING.md`, `SECURITY.md`, `.editorconfig`, and GitHub issue/PR templates.
+- npm-version and CI-status badges in the README.
+
 ## [1.1.0] — 2026-06-04
 
 ### Added

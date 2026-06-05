@@ -2,8 +2,9 @@
 
 > Personalized "what's new in Claude" — only what changed since you last checked, only what matters for *your* setup.
 
+[![npm](https://img.shields.io/npm/v/claude-release-radar?color=d97757&label=npm)](https://www.npmjs.com/package/claude-release-radar)
+[![Tests](https://github.com/gdorta/claude-release-radar/actions/workflows/test.yml/badge.svg)](https://github.com/gdorta/claude-release-radar/actions/workflows/test.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Skill](https://img.shields.io/badge/Claude-Skill-d97757.svg)](https://docs.claude.com)
 [![Zero dependencies](https://img.shields.io/badge/dependencies-0-brightgreen.svg)](#)
 
 ![Claude Release Radar — a Claude Desktop plugin and CLI skill that delivers a personalized "what's new in Claude" briefing: only what changed since you last checked, flagged for your setup](assets/banner.png)

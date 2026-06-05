@@ -1,0 +1,52 @@
+name: Tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  engine:
+    name: engine (py ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Byte-compile (catch syntax errors on every supported version)
+        run: python -m compileall -q scripts/radar.py
+
+      - name: Run unit tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+      - name: Smoke-test the CLI offline (no network)
+        run: |
+          mkdir -p "$RUNNER_TEMP/empty"
+          python scripts/radar.py sources
+          python scripts/radar.py check --no-env --input "$RUNNER_TEMP/empty" --state "$RUNNER_TEMP/state.json"
+          python scripts/radar.py check --no-env --input "$RUNNER_TEMP/empty" --state "$RUNNER_TEMP/state.json" --json
+
+  cli:
+    name: npx installer
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install copies the canonical root files (backward-compat guarantee)
+        run: |
+          node bin/cli.js install --dir "$RUNNER_TEMP/skills"
+          dest="$RUNNER_TEMP/skills/claude-release-radar"
+          test -f "$dest/SKILL.md"
+          test -f "$dest/scripts/radar.py"
+          test -f "$dest/scripts/sources.json"
+          test -f "$dest/reference/sources.md"
+          echo "✓ CLI install layout is correct"
