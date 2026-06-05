@@ -142,7 +142,7 @@ A community project. Not affiliated with or endorsed by Anthropic. "Claude" is a
 
 ## License
 
-[MIT](LICENSE). PRs welcome — especially new sources and parsers.
+[MIT](LICENSE). PRs welcome — especially new sources and parsers. Curious where it's headed? See the [roadmap](ROADMAP.md).
 
 ---
 
